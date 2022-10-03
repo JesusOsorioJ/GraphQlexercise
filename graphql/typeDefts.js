@@ -1,6 +1,6 @@
 const { gql } = require('apollo-server-express')
 
-const typeDefs = gql
+const typeDefs = gql`
 
 type AppUser_TB {
     _i: ID!
@@ -55,7 +55,7 @@ type Mutation {
     createDocument(input : DocumentInput!): Document!
 }
 
-
+`
 
 
 module.exports = typeDefs
