@@ -25,7 +25,8 @@ async function configGraphql(app){
               ],
             context: ({ req }) => {
                 return req.headers.authorization;
-              },     
+              }, 
+              introspection: process.env.NODE_ENV !== 'production'    
         })
 
         await apolloServer.start()
