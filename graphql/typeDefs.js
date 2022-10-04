@@ -40,15 +40,15 @@ const typeDefs = gql`
 
     type Mutation {
         createUser(input : UserInput!): AppUser_TB!
+        LoginUser(input : UserInput!): AppUser_TB!
         createcontactInfo(input : ContactInput!): ContactInfo_TB!
         createDocument(input : DocumentInput!): UserDocument_TB!
         
     }
 
     input UserInput{
-        username: String!
-        password: String!
         email: String!
+        password: String!   
     }
 
     input DocumentInput {

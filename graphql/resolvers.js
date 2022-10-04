@@ -8,6 +8,9 @@ const resolvers = {
 
     Mutation: {
         createUser: userController.handlerCreateUser,
+        LoginUser: userController.handlerLoginUser,
+        createcontactInfo: userController.handlercreatecontactInfo,
+        createDocument: userController.handlercreateDocument
     }
 }
 

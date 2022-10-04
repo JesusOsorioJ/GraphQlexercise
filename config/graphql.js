@@ -8,6 +8,9 @@ async function configGraphql(app){
         const apolloServer= new ApolloServer({
             typeDefs,
             resolvers,
+            context: ({ req }) => {
+                return req.headers.authorization;
+              },
         })
 
         await apolloServer.start()
