@@ -1,4 +1,8 @@
 const { ApolloServer } = require('apollo-server-express')
+const {
+  ApolloServerPluginDrainHttpServer,
+  ApolloServerPluginLandingPageLocalDefault,
+} = ('apollo-server-core');
 
 const resolvers = require('../graphql/resolvers')
 const typeDefs = require('../graphql/typeDefs')
@@ -11,7 +15,12 @@ async function configGraphql(app){
             context: ({ req }) => {
                 return req.headers.authorization;
               },
-            introspection: process.env.NODE_ENV !== 'production'
+              csrfPrevention: true,
+              cache: 'bounded',
+              plugins: [
+                ApolloServerPluginDrainHttpServer({ httpServer }),
+                ApolloServerPluginLandingPageLocalDefault({ embed: true }),
+              ],
         })
 
         await apolloServer.start()
