@@ -1,7 +1,7 @@
 const jsonwebtoken = require('jsonwebtoken');
 const userModel = require ('./user.model')
-const userModel = require ('./user.model')
-const userModel = require ('./user.model')
+const ContactInfoModel = require ('./ContactInfo.model')
+const userDocumentModel = require ('./userDocument.model')
 
 
 async function getAllUser() {
@@ -16,8 +16,16 @@ async function createUser(body) {
   return await userModel.create(body);
 }
 
+async function createContactoinfo(body) {
+    return await ContactInfoModel.create(body);
+  }
+
+async function createuserDocument(body) {
+    return await userDocumentModel.create(body);
+}
+
 async function updateUser(id, body) {
-  const updatedClient = await userModel.findByIdAndUpdate(id, body, {
+  const updatedUser = await userModel.findByIdAndUpdate(id, body, {
     new: true
   })
   return updatedUser;
@@ -61,6 +69,8 @@ module.exports = {
   getAllUser,
   getUserByEmail,
   createUser,
+  createContactoinfo,
+  createuserDocument,
   updateUser,
   signToken,
   isAuthenticated,

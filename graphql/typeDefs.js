@@ -3,7 +3,7 @@ const { gql, GraphqlErrorBuilder } = require('apollo-server-express')
 const typeDefs = gql`
 
     type AppUser_TB {
-        _i: ID!
+        _id: ID!
         "The tittle of te book"
         Name: String
         LastName: String
@@ -16,16 +16,18 @@ const typeDefs = gql`
     }
 
     type UserDocument_TB {
-        _i: ID!
+        _id: ID!
+        userID: String!
         "The tittle of te book"
         Document: String!
         TypeDocument: String!
-        PlaceExpedition: Boolean!
-        DateExpedition: String!
+        PlaceExpedition: String
+        DateExpedition: String
     }
 
     type ContactInfo_TB {
-        _i: ID!
+        _id: ID!
+        userID: String
         "The tittle of te book"
         CountryId: String!
         City: String!
@@ -41,6 +43,7 @@ const typeDefs = gql`
     type Mutation {
         createUser(input : UserInput!): AppUser_TB!
         LoginUser(input : UserInput!): AppUser_TB!
+        UpdateUser(input : UserUpdate!): AppUser_TB!
         createcontactInfo(input : ContactInput!): ContactInfo_TB!
         createDocument(input : DocumentInput!): UserDocument_TB!
         
@@ -49,6 +52,16 @@ const typeDefs = gql`
     input UserInput{
         email: String!
         password: String!   
+    }
+
+    input UserUpdate {
+        
+        "The tittle of te book"
+        Name: String
+        LastName: String
+        IsMilitar: Boolean
+        username: String
+        verificationToken: String
     }
 
     input DocumentInput {
