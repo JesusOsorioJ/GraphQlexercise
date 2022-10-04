@@ -26,6 +26,7 @@ async function createContactoinfo(body) {
     return await ContactInfoModel.create(body);
   }
 
+  
 async function createuserDocument(body) {
     return await userDocumentModel.create(body);
 }

@@ -1,6 +1,6 @@
 ## GraphQlexercise: _Texto explicativo de página_
 https://graphqlexercise.herokuapp.com/graphql
-La página tiene una base de datos en MongoDb con tres colecciones:
+La página tiene una base de datos en MongoDb con tres colecciones
 - **AppUser_TB:**  contiene la información el usuario
 - **UserDocument_TB:** contiene la información de documento de identidad del usuario
 - **ContactInfo_TB:** contiene la información de Contacto del usuario
