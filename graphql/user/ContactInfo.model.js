@@ -18,7 +18,7 @@ const ContactInfoSchema = new mongoose.Schema(
             trim: true
         },
         CelPhone: {
-            type: String,
+            type: Number,
             required: false,
             trim: true
         },
@@ -28,7 +28,7 @@ const ContactInfoSchema = new mongoose.Schema(
             trim: true
         }, 
         EmergencyPhone: {
-            type: String,
+            type: Number,
             required: false,
             trim: true
         },

@@ -4,8 +4,14 @@ const ContactInfoModel = require ('./ContactInfo.model')
 const userDocumentModel = require ('./userDocument.model')
 
 
-async function getAllUser() {
-  return await userModel.find();
+async function getAllUser(body) {
+  return await userModel.find(body);
+}
+async function getAllUserDocument(body) {
+  return await userDocumentModel.find(body);
+}
+async function getAllContactInfo(body) {
+  return await ContactInfoModel.find(body);
 }
 
 async function getUserByEmail(email){
@@ -53,25 +59,23 @@ async function isAuthenticated(authHeader) {
           return false
         }else{
             const TokenExist = await userModel.findOne({ "verificationToken" : authHeader });
-            if (!TokenExist){
+            if (TokenExist){
             const payload = await validateToken(authHeader);
             if (!payload){
                 return false
             }else{
                 return TokenExist
                 // return payload
-            }}
+            }}else{
+              return false}
 
         }
     }
 
 module.exports = {
-  getAllUser,
-  getUserByEmail,
-  createUser,
-  createContactoinfo,
-  createuserDocument,
-  updateUser,
-  signToken,
-  isAuthenticated,
+  getAllUser, getUserByEmail,
+  getAllUserDocument, getAllContactInfo,
+  createUser, createContactoinfo,
+  createuserDocument, updateUser,
+  signToken, isAuthenticated,
 }

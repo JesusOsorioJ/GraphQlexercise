@@ -2,9 +2,10 @@ const { gql, GraphqlErrorBuilder } = require('apollo-server-express')
 
 const typeDefs = gql`
 
+
+
     type AppUser_TB {
-        _id: ID!
-        "The tittle of te book"
+        _id: ID
         Name: String
         LastName: String
         IsMilitar: Boolean
@@ -12,32 +13,36 @@ const typeDefs = gql`
         username: String
         password: String
         email: String
+        emailverified: Boolean
         verificationToken: String
     }
-
+    
     type UserDocument_TB {
-        _id: ID!
-        userID: String!
-        "The tittle of te book"
-        Document: String!
-        TypeDocument: String!
+        _id: ID
+        userID: String
+        Document: Float
+        TypeDocument: String
         PlaceExpedition: String
         DateExpedition: String
     }
 
+    
     type ContactInfo_TB {
-        _id: ID!
+        _id: ID
         userID: String
-        "The tittle of te book"
-        CountryId: String!
-        City: String!
-        CelPhone: Boolean!
-        EmergencyName: String!
-        EmergencyPhone: String!
+        CountryId: String
+        City: String
+        CelPhone: Float
+        EmergencyName: String
+        EmergencyPhone: Float
     }
 
     type Query {
-        allUser: [AppUser_TB]
+        allUser(Name: String, LastName: String, IsMilitar: Boolean, email: String ):[AppUser_TB]
+        UserDocumentByUser(userID: String!):[UserDocument_TB]
+        ContactInfoByUser(userID: String!):[ContactInfo_TB]
+        allUserDocument(userID: String, TypeDocument: String, PlaceExpedition: String):[UserDocument_TB]
+        allContactInfo(userID: String, CountryId: String, City: String ):[ContactInfo_TB]
     }
 
     type Mutation {
@@ -46,7 +51,6 @@ const typeDefs = gql`
         UpdateUser(input : UserUpdate!): AppUser_TB!
         createcontactInfo(input : ContactInput!): ContactInfo_TB!
         createDocument(input : DocumentInput!): UserDocument_TB!
-        
     }
 
     input UserInput{
@@ -54,39 +58,28 @@ const typeDefs = gql`
         password: String!   
     }
 
-    input UserUpdate {
-        
-        "The tittle of te book"
-        Name: String
-        LastName: String
+    input UserUpdate { 
+        Name: String!
+        LastName: String!
         IsMilitar: Boolean
         username: String
-        verificationToken: String
     }
 
     input DocumentInput {
-        _i: ID!
-        "The tittle of te book"
-        Document: String!
+        Document: Float!
         TypeDocument: String!
-        PlaceExpedition: Boolean!
-        DateExpedition: String!
+        PlaceExpedition: String
+        DateExpedition: String
     }
 
     input ContactInput {
-        _i: ID!
-        "The tittle of te book"
+
         CountryId: String!
         City: String!
-        CelPhone: Boolean!
-        EmergencyName: String!
-        EmergencyPhone: String!
+        CelPhone: Float!
+        EmergencyName: String
+        EmergencyPhone: Float
     }
 
-
-
-
 `
-
-
 module.exports = typeDefs;

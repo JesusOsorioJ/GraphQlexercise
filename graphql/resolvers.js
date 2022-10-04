@@ -4,6 +4,10 @@ const resolvers = {
 
     Query: {
         allUser: userController.handlerAllUser,
+        UserDocumentByUser: userController.handlerallUserDocument,
+        ContactInfoByUser: userController.handlerallContactInfo,
+        allUserDocument: userController.handlerallUserDocument,
+        allContactInfo: userController.handlerallContactInfo,
     },
 
     Mutation: {

@@ -3,23 +3,23 @@ const bcrypt = require('bcrypt');
 
 const UserSchema = new mongoose.Schema(
     {
-        name: {
+        Name: {
             type: String,
             required: false,
             trim: true
         },
-        lastname: {
+        LastName: {
             type: String,
             required: false,
             trim: true
         },
-        isMilitar: {
+        IsMilitar: {
             type: Boolean,
             required: false,
             trim: true
         },
-        isTemporal: {
-            type: Boolean,
+        TimeCreate: {
+            type: String,
             required: false,
             trim: true
         },
@@ -39,11 +39,12 @@ const UserSchema = new mongoose.Schema(
             trim: true
         },
         emailverified: {
-            type: String,
+            type: Boolean,
             required: false,
-            trim: true
+            trim: true,
+            default: false
         },
-        emailToken: {
+        verificationToken: {
             type: String,
             required: false,
             trim: true

@@ -2,15 +2,25 @@ const {
     getAllUser,getUserByEmail,
     createUser,updateUser,
     signToken,isAuthenticated,
-    createContactoinfo, createuserDocument
+    createContactoinfo, createuserDocument,
+    getAllUserDocument, getAllContactInfo
   } = require('./user.service');
 
   const {UserInputError} = require('apollo-server-express');
 
 
-  async function handlerAllUser(req, res) {
-    return getAllUser();
-  }
+  async function handlerAllUser(parent, args) {
+    const {input} = args    
+    return getAllUser(input);}
+
+  async function handlerallUserDocument(parent, args) {
+    const {input} = args    
+    return getAllUserDocument(input);}
+
+    async function handlerallContactInfo(parent, args) {
+      const {input} = args    
+      return getAllContactInfo(input);}
+  
   
   async function handlerUserByEmail(parent, args) {
     const {input} = args    
@@ -27,7 +37,8 @@ const {
     const useremail = await getUserByEmail(input.email)
     if (useremail === null){
         const Token = signToken(input)
-        return await createUser({...input, verificationToken:Token});
+        console.log("Token",Token);
+        return await createUser({...input, "verificationToken":Token});
     }else{
     throw new UserInputError('This email has been created');
     } 
@@ -47,11 +58,12 @@ const {
   
   async function handlerUpdateUser(parent, args, context) {
     const {input} = args
-    const valor = isAuthenticated(Object.values(context).join(''))
+    const valor = await isAuthenticated(Object.values(context).join(''))
+    console.log("valor._id",valor._id);
     if ( valor === false){
-      throw new UserInputError('Authorization eader is empty or wrong');
+      throw new UserInputError('Authorization header is empty or wrong');
     }else{
-      const client = await updateUser( valor._id , args);
+      return await updateUser( valor.id , input);
     }
   }
   
@@ -59,24 +71,24 @@ const {
     const {input} = args
     const valor = isAuthenticated(Object.values(context).join(''))
     if ( valor === false){
-      throw new UserInputError('Authorization eader is empty or wrong');
+      throw new UserInputError('Authorization header is empty or wrong');
     }else{
-       const client = await createContactoinfo(({...input, userID : valor._id }));
-        return res.status(200).json(client);
+      return  await createContactoinfo(({...input, userID : valor.id })); 
     }
   }
   async function handlercreateDocument(parent, args, context) {
     const {input} = args
     const valor = isAuthenticated(Object.values(context).join(''))
     if ( valor === false){
-      throw new UserInputError('Authorization eader is empty or wrong');
+      throw new UserInputError('Authorization header is empty or wrong');
     }else{
-      const createuserDo = await createuserDocument({...input, userID : valor._id });
-      return createuserDo
+      return  await createuserDocument({...input, userID : valor.id }); 
     }
   }
   module.exports= {
     handlerAllUser,
+    handlerallUserDocument,
+    handlerallContactInfo,
     handlerUserByEmail,
     handlerCreateUser,
     handlerUpdateUser,
@@ -84,3 +96,4 @@ const {
     handlercreatecontactInfo,
     handlercreateDocument
   }
+

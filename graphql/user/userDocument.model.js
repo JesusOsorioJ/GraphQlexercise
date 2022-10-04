@@ -8,7 +8,7 @@ const UserDocumentSchema = new mongoose.Schema(
             trim: true
         },
         Document: {
-            type: String,
+            type: Number,
             required: false,
             trim: true
         },
