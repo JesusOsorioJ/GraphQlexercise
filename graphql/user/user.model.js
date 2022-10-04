@@ -1,50 +1,50 @@
 const mongoose = require('mongoose');
 
-const ClientSchema = new mongoose.Schema(
+const UserSchema = new mongoose.Schema(
     {
         name: {
             type: String,
-            required: true,
+            required: false,
             trim: true
         },
         lastname: {
             type: String,
-            required: true,
+            required: false,
             trim: true
         },
         isMilitar: {
             type: Boolean,
-            required: true,
+            required: false,
             trim: true
         },
         isTemporal: {
             type: Boolean,
-            required: true,
+            required: false,
             trim: true
         },
         username: {
             type: String,
-            required: true,
+            required: false,
             trim: true
         },
         password: {
             type: String,
-            required: true,
+            required: false,
             trim: true
         },
         email: {
             type: String,
-            required: true,
+            required: false,
             trim: true
         },
         emailverified: {
             type: String,
-            required: true,
+            required: false,
             trim: true
         },
         emailToken: {
             type: String,
-            required: true,
+            required: false,
             trim: true
         },
         
@@ -52,3 +52,5 @@ const ClientSchema = new mongoose.Schema(
     { timestamps: true },
     { versionKey: false }
 );
+
+module.exports = mongoose.model('User', UserSchema)

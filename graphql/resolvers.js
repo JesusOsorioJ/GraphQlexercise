@@ -1,13 +1,13 @@
-const userController = require ('./pet')
+const userController = require ('./user')
 
-const resolves = {
-    
+const resolvers = {
+
     Query: {
-        allUser: usersController.allUsersHandler,
+        allUser: userController.handlerAllUser,
     },
 
     Mutation: {
-        createUser: userController.createUSerHandler,
+        createUser: userController.handlerCreateUser,
     }
 }
 

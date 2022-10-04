@@ -1,31 +1,59 @@
 const {
-    getAllClients,
-    getClientById,
-    getClientByEmail,
-    createClient,
-    updateClient
-  } = require('./clients.service');
+    getAllUser,
+    getUserByEmail,
+    createUser,
+    updateUser
+  } = require('./user.service');
   
-  
-  async function handlerAllClients(req, res) {
-    res.json(await getAllClients());
+  const {
+    UserInputError
+  } = require('apollo-server-express');
+
+
+  async function handlerAllUser(req, res) {
+    return getAllUser();
   }
   
-  async function handlerClientById(req, res) {
+  async function handlerUserByEmail(parent, args) {
+    const {input} = args    
     try {
-      const { id } = req.params;
-      const client = await getClientById(id);
+      const client = await getUserByEmail(req.user.email);
+      return res.status(200).json(client);
+    } catch (error) {
+      return res.status(404).json({ message: 'Information not found' });
+    }
+  }
+
+  async function handlerCreateUser(parent, args) {
+    const {input} = args    
+    const useremail = await getUserByEmail(input.email)
+    if (useremail === null){
+        return await createUser(input);
+    }else{
+    throw new UserInputError('This email has been created');
+    }
+    
+    
+      
+    
+       
+    
+  }
+  
+  async function handlerUpdateUser(req, res) {
+    const { id } = req.params;
+    const update = req.body;
+    try {
+      const client = await updateUser(id, update);
       return res.status(200).json(client);
     } catch (error) {
       return res.status(404).json({ message: `Client not found with id: ${id}` });
     }
   }
   
-  async function handlerClientByEmail(req, res) {
-    try {
-      const client = await getClientByEmail(req.user.email);
-      return res.status(200).json(client);
-    } catch (error) {
-      return res.status(404).json({ message: 'Information not found' });
-    }
+  module.exports= {
+    handlerAllUser,
+    handlerUserByEmail,
+    handlerCreateUser,
+    handlerUpdateUser,
   }

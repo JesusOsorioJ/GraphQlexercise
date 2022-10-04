@@ -1,17 +1,17 @@
-const { ApolloServer } = require("apollo-server-express")
+const { ApolloServer } = require('apollo-server-express')
 
 const resolvers = require('../graphql/resolvers')
-const typeDefts = require('../graphql/typeDefts')
+const typeDefs = require('../graphql/typeDefs')
 
 async function configGraphql(app){
     try {
-        const ApolloServer= new ApolloServer({
-            typeDefts,
+        const apolloServer= new ApolloServer({
+            typeDefs,
             resolvers,
         })
 
-        await ApolloServer.start()
-        ApolloServer.applyMiddleeware({app})
+        await apolloServer.start()
+        apolloServer.applyMiddleware({app})
         console.log('GraphQl Running')
 
     } catch (error) {

@@ -19,7 +19,6 @@
   },
   "homepage": "https://github.com/JesusOsorioJ/GraphQlexercise#readme",
   "dependencies": {
-    "apollo-server": "^3.10.2",
     "apollo-server-express": "^3.10.2",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
