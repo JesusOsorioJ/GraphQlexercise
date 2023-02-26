@@ -1,5 +1,5 @@
 ## GraphQlexercise: _Texto explicativo de página_
-https://graphqlexercise.herokuapp.com/graphql
+https://graphqlexercise.up.railway.app/graphql
 La página tiene una base de datos en MongoDb con tres colecciones
 - **AppUser_TB:**  contiene la información el usuario
 - **UserDocument_TB:** contiene la información de documento de identidad del usuario
